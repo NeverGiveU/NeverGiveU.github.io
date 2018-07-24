@@ -1,0 +1,58 @@
+#password{
+    background-color: white; border-radius: 10px; display: inline;
+    display: inline;
+    position: fixed;
+    top: 40%;
+    left: 25%;
+    right: 25%;
+}
+#code{
+    padding-left: 6%;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: large;
+    float: left;
+}
+#verbar{
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: large;
+    float: left;
+}
+#coding{
+    margin-top: 3%;
+    margin-left: 5%;
+    height: 25px;
+    width: 60%;
+    border-radius: 5px;
+    background-color: aliceblue;
+    border: none;
+}
+#cod_ent{
+    color: #ff3b00;
+    background-color: white;
+    border: #ff3b00 solid 1px;
+    border-radius: 40px;
+    font-family: "Times New Roman";
+    float: right;
+    margin-right: 15%;
+    margin-top: 5%;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 1%;
+    font-size: large;
+}
+#cod_ent:hover{
+    background-color: #fff9bc;
+    cursor: pointer;
+}
+#enterimg{
+    margin-left: 45%;
+    width: 10%;
+    margin-right: 45%;
+    margin-top: 500px;
+    display: none;
+}

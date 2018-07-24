@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小黑の空间-秘密花园</title>
+
+    <link rel="icon" href="{{url_for('static', filename='src/favicon.ico')}}" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{url_for('static', filename='src/favicon.ico')}}" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/daily.css')}}"/>
+    <link href="{{url_for('static', filename='css/index.css')}}" rel="stylesheet" type="text/css"/>
+
+    <script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+</head>
+<body style="background-color: #ffe4ea" >
+<div class="snow">
+    <img id="addbtn" src="{{url_for('static', filename='src/add.png')}}"/>
+    <img id="refreshbtn" src="{{url_for('static', filename='src/refresh.png')}}"/>
+    <!--<img id="welcome" src="{{url_for('static', filename='images/forusers/752025/welcome.png')}}"/>-->
+    <div id="editor">
+        <h3 style="margin-left: 5%;" >To &hearts;<b>Chopin</b></h3>
+        <hr class="hr1"/>
+        <textarea id="editing" placeholder="你想对他说.."></textarea>
+    </div>
+    <div id="page">
+        <b><h1>Welcome Liang<sup style="color: #ff3b00">&hearts;</sup>媛！</h1></b>
+        <p><span>亮媛今天也要开开心心的加油ya~</span><span style="color: #ffb339">O(∩_∩)O</span></p>
+        <hr class="hr1"/>
+        <ul id="daily_list" style="margin-left: 5%; margin-top: 20px; list-style: none">
+
+        </ul>
+    </div>
+
+</div>
+<script>
+    $(function () {
+        $('body').css("height",$(window).height())
+        var wid=$(window).width();
+        var html_snow="<img src='{{url_for('static', filename='images/snow-item.png')}}' class='snow_img'>";
+        setInterval(function(){$(".snow").append(html_snow);snowFlow();},1000);
+        function snowFlow(){
+            $(".snow_img").each(function(index){
+                var snow_time=(Math.random()*10+4)*1000;
+                var wid_snow=Math.floor(Math.random()*40+5)+'px';
+                var float_left=Math.random()*wid*2-wid+"px";
+                var wid_left=Math.random()*wid+"px";
+                if( $(this).css("margin-left")==1+"px"){
+                    $(this).css("margin-left",wid_left);
+                }
+                $(this).width(wid_snow);
+
+                $(this).animate({top:800+"px",left:float_left,},snow_time);
+                if($(this).offset().top >= 3 * $(window).height() / 5){
+                    $(this).remove();
+                }
+            })
+        };
+        $('#addbtn').click(function () {
+            var user = '媛';
+            var content = document.getElementById('editing').value;
+            console.log(content);
+            if(content === ""){
+
+            }else{
+                var data = {
+                    'require': 'add',
+                    'user': user,
+                    'content': content
+                }
+                $.ajax({
+                    type: 'GET',
+                    url: '{{url_for("refresh")}}',
+                    data: data,
+                    dataType: 'json',
+                    success: function (data) {
+                        var item = data.item;
+                        var time = item['time'];
+                        var user = item['user'];
+                        var content = item['content'];
+                        $('#daily_list').append(
+                            "<li><div class='his_item'>" +
+                            "<span class='item-time'>"+ time +"</span><span class='item-user'><b> by "+user+"</b></span><hr class='hr2'/>" +
+                            "<p class='item-content'>"+content+"</p></div></li>"
+                        );
+                        document.getElementById('editing').value = "";
+                    }
+                })
+            }
+        })
+        $('#refreshbtn').click(function () {
+            var data = {
+                'require': 'refresh'
+            }
+            $.ajax({
+                type: 'GET',
+                url: '{{ url_for("refresh") }}',
+                data: data,
+                dataType: 'json',
+                success: function(data){
+
+                    $("#daily_list").find("li").remove();
+
+                    var history = data.history;
+                    //console.log(history[0]['time']);
+                    for(var i = 0; i < history.length; ++i){
+                        var time = history[i]['time'];
+                        var user = history[i]['user'];
+                        var content = history[i]['content'];
+                        $('#daily_list').append(
+                            "<li><div class='his_item'>" +
+                            "<span class='item-time'>"+ time +"</span><span class='item-user'><b> by "+user+"</b></span><hr class='hr2'/>" +
+                            "<p class='item-content'>"+content+"</p></div></li>"
+                        );
+                    }
+                }
+            });
+        })
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+#addbtn{ position: fixed; right: 50px; bottom: 200px; width: 70px; }
+#addbtn:hover{ width: 80px; }
+#refreshbtn{ position: fixed; right: 50px; bottom: 100px; width: 70px; }
+#refreshbtn:hover{ width: 80px; }
+#page{ background-color: rgba(255, 255, 255, 0.5); width: 70%; position: absolute; margin-left: 5%; display: inline }
+#welcome{ margin-left: 5%; width: 70%; margin-top: 0.5%; }
+.hr1{ background: #ff705e; border: none; height: 1px; margin-left: 5% }
+.hr1_{ background: #1a005a; border: none; height: 1px; margin-left: 5% }
+.hr2{ background: #ffc497; border: none; height: 1px; margin-left: 5%; margin-right: 5%; }
+.hr2_{ background: #4427b3; border: none; height: 1px; margin-left: 5%; margin-right: 5%; }
+h1{ margin-left: 5%; font-size: 50px; }
+p{ margin-left: 5%; }
+.his_item{ background-color: white; border-radius: 10px; box-shadow: 5px 5px 10px #ffc497; width: 90%; }
+.his_item_{ background-color: white; border-radius: 10px; box-shadow: 5px 5px 10px #75a2ff; width: 90%; }
+.item-time{ margin-left: 5%; color: #f4af3b; font-size: 30px; }
+.item-time_{ margin-left: 5%; color: #262453; font-size: 30px; }
+.item-user{ color: cadetblue; }
+.item-content{ margin-left: 5%; color: #d8cb9b; padding-bottom: 20px; font-size: 22px; }
+#editor{ position: fixed; right: 20px; top: 16%; background-color: white; border-radius: 10px; height: 40%; width: 20%; }
+#editing{ margin-left: 5%; padding: 10px;background-color: antiquewhite; width: 80%; height: 50%;border-radius: 6px; border: none; font-size: 20px; color: #cb3000; font-family: Bahnschrift;}
+#editing_{ margin-left: 5%; padding: 10px;background-color: antiquewhite; width: 80%; height: 50%;border-radius: 6px; border: none; font-size: 20px; color: #4b8698; font-family: Bahnschrift; background-color: #e1e5ee
+}

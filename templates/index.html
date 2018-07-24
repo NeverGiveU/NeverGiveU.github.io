@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>小黑の空间</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+
+    <link rel="icon" href="{{url_for('static', filename='src/favicon.ico')}}" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{url_for('static', filename='src/favicon.ico')}}" type="image/x-icon"/>
+
+	<link href="{{url_for('static', filename='css/index.css')}}" rel="stylesheet" type="text/css"/>
+</head>
+<style>
+	body{margin: 0 auto;
+		overflow-x: hidden;
+	}
+</style>
+
+<body background="{{url_for('static', filename='images/bg.jpg')}}">
+
+	<div class="snow">
+        <!-- add some new tags here -->
+        <div id="index-title" >
+            <img style="width: 80%" src="{{url_for('static', filename='images/index-title.png')}}" id="title_img"/>
+            <div>
+                <img style="width: 22%; margin-right: 5%; cursor: pointer;" src="{{url_for('static', filename='images/fish_01.png')}}" id="fish01" name="fish01" class="fish"/>
+                <img style="width: 22%; margin-right: 5%; cursor: pointer;" src="{{url_for('static', filename='images/fish_02.png')}}" id="fish02" name="fish02" class="fish"/>
+                <img style="width: 22%; cursor: pointer;" src="{{url_for('static', filename='images/fish_03.png')}}" id="fish03" name="fish03" class="fish"/>
+            </div>
+        </div>
+    </div>
+	<script>
+		$(function(){
+		    // ********************************** the snowing animation ********************************** //
+			$('body').css("height",$(window).height())
+			var wid=$(window).width();
+			var html_snow="<img src='{{url_for('static', filename='images/snow-item.png')}}' class='snow_img'>";
+			setInterval(function(){$(".snow").append(html_snow);snowFlow();},1000);
+			function snowFlow(){
+				$(".snow_img").each(function(index){
+					var snow_time=(Math.random()*10+4)*1000;
+					var wid_snow=Math.floor(Math.random()*40+5)+'px';
+	                var float_left=Math.random()*wid*2-wid+"px";
+					var wid_left=Math.random()*wid+"px";
+				    if( $(this).css("margin-left")==1+"px"){
+					    $(this).css("margin-left",wid_left);
+					}
+                    $(this).width(wid_snow);
+
+					$(this).animate({top:800+"px",left:float_left,},snow_time);
+					if($(this).offset().top >= 3 * $(window).height() / 5){
+					    $(this).remove();
+					}
+				})
+			}
+
+			// ********************************** the title img ********************************** //
+            setInterval(function(){
+                $("#title_img").attr("src", "{{url_for('static', filename='images/closed-eyes.png')}}");
+            },10000);
+			setInterval(function(){
+                $("#title_img").attr("src", "{{url_for('static', filename='images/index-title.png')}}");
+            },15000);
+			$("#title_img").click(function () {
+                $("#title_img").attr("src", "{{url_for('static', filename='images/index-title.png')}}");
+            })
+
+            // ********************************** the fishes ********************************** //
+            $(".fish").mouseover(function () {
+                $(this).css("width", '25%');
+            })
+            $(".fish").mouseout(function () {
+                $(this).css("width", '22%');
+            })
+            $("#fish01").on("click", function () {
+                var data={
+                    'signal': 1
+                };
+                $.ajax({
+                    type: 'GET',
+                    url: '{{url_for("fish")}}',
+                    data: data,
+                    dataType: 'json',
+                    success: function () {
+                        console.log("Su1");
+                    }
+                })
+                document.location.href="login";
+            })
+            $("#fish02").on("click", function () {
+                var data={
+                    'signal': 2
+                };
+                $.ajax({
+                    type: 'GET',
+                    url: '{{url_for("fish")}}',
+                    data: data,
+                    dataType: 'json',
+                    success: function () {
+                        console.log("Su2");
+                    }
+                })
+                document.location.href="login";
+            })
+            $("#fish03").on("click", function () {
+                var data={
+                    'signal': 3
+                };
+                $.ajax({
+                    type: 'GET',
+                    url: '{{url_for("fish")}}',
+                    data: data,
+                    dataType: 'json',
+                    success: function () {
+                        console.log("Su3");
+                    }
+                })
+                document.location.href="login";
+            })
+
+            // ********************************** other help functions ********************************** //
+            function sleep(numberMillis) {
+                var now = new Date();
+                var exitTime = now.getTime() + numberMillis;
+                while (true) {
+                    now = new Date();
+                    if (now.getTime() > exitTime)
+                        return;
+                }
+            }
+		});
+	</script>
+
+</body>
+</html>
